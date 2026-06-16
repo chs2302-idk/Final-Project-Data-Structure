@@ -8,7 +8,7 @@
 | **Soal 1 (No Walls/Weights)** | Greedy Best-First Search | **11** | **10** | **10** |
 | **Soal 2 (Walls, No Weights)** | Breadth-First Search (BFS) | **35** | **14** | **14** |
 | **Soal 2 (Walls, No Weights)** | Depth-First Search (DFS)| **30** | **14** | **14** |
-| **Soal 3 (Walls & Weights)** | Dijkstra | **278** | **47** | **67** |
+| **Soal 3 (Walls & Weights)** | Dijkstra | **278** | **47** | **46** |
 | **Soal 3 (Walls & Weights)** | Breadth-First Search (BFS) | **278** | **47** | **57** |
 ---
 
