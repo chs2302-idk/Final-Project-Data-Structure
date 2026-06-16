@@ -6,7 +6,8 @@
 | :--- | :--- | :---: | :---: | :---: |
 | **Soal 1 (No Walls/Weights)** | Breadth-First Search (BFS) | **36** | **10** | **10** |
 | **Soal 1 (No Walls/Weights)** | Greedy Best-First Search | **11** | **10** | **10** |
-| **Soal 2 (Walls, No Weights)** | *[Friend's Task — Pending]* | *TBD* | *TBD* | *TBD* |
+| **Soal 2 (Walls, No Weights)** | Breadth-First Search (BFS) | **35** | **14** | **14** |
+| **Soal 2 (Walls, No Weights)** | Depth-First Search (DFS)| **30** | **14** | **14** |
 | **Soal 3 (Walls & Weights)** | *[Friend's Task — Pending]* | *TBD* | *TBD* | *TBD* |
 
 ---
