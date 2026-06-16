@@ -33,6 +33,7 @@ It relies fundamentally on a Standard First-In First-Out (FIFO) Queue to manage 
 ### Soal 1: No Walls, No Weights
 
 #### BFS
+```
 #include "harness.h"
 #include <queue>
 #include <map>
@@ -75,8 +76,10 @@ vector<Cell> solve(vector<vector<char>>& grid, Cell start, Cell goal){
 
   return visited;
 }
+```
 
 #### Greedy BFS
+```
 #include "harness.h"
 #include <queue>
 #include <map>
@@ -128,3 +131,4 @@ vector<Cell> solve(vector<vector<char>>& grid, Cell start, Cell goal){
 
   return visited;
 }
+```
