@@ -34,7 +34,9 @@ It employs a Standard LIFO Stack for maintaining frontier nodes and Hash Map or 
 
 ### Soal 3: With Walls & Weights
 Dijkstra's Algorithm was chosen because the map contains both walls and weighted cells with traversal costs ranging from 1 to 9. In this situation, finding the shortest path in terms of steps is not enough, since a shorter route may have a higher total cost than a longer route with cheaper cells.
+
 Dijkstra's algorithm evaluates the cumulative cost of each path and always expands the node with the lowest known cost using a priority queue. This allows the algorithm to efficiently avoid expensive cells and identify the minimum-cost route to the goal.
+
 Compared to BFS, Dijkstra requires additional processing and memory because it must maintain distance values and manage a priority queue. However, this trade-off is worthwhile because it guarantees the optimal solution for weighted maps, making it the most suitable algorithm for Soal3.
 
 
