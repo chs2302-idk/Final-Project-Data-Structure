@@ -18,13 +18,8 @@
 ## Analysis Per Problem
 
 ### Soal 1: Open Grid Layout (No Walls, No Weights)
-For the baseline map, we implemented and contrasted two different approaches to showcase algorithmic efficiency:
-
-1. **Breadth-First Search (BFS):** * **Behavior:** BFS expands blindly and uniformly in a circular pattern across the grid. It processed **36 cells** before validating the path to the goal position.
-   * **Trade-off:** It guarantees the shortest path, but has high computational overhead (large exploration footprint).
-2. **Greedy Best-First Search:**
-   * **Behavior:** Utilizing a Manhattan Distance heuristic ($|x_1 - x_2| + |y_1 - y_2|$), the priority queue pushes the exploration directly toward the target coordinates in a straight diagonal path. It processed only **11 cells**.
-   * **Trade-off:** Drastically reduces the `Cells Explored` metric while maintaining path optimality on completely open terrain.
+BFS is an unweighted graph traversal algorithm that explores nodes layer by layer uniformly outwards from the starting position, similar to a ripple expanding in water. It guarantees finding the shortest path on unweighted graphs because it evaluates all nodes at depth d before moving to depth 
+It relies fundamentally on a Standard First-In First-Out (FIFO) Queue to manage the collection of frontier nodes to explore next, alongside a Hash Map or Balanced BST to keep track of discovered cells and prevent cycle evaluation.
 
 ### Soal 2: Maze Layout (With Walls, No Weights)
 * **Assigned To:** [Friend's Name 1]
