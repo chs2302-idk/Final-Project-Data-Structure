@@ -30,3 +30,101 @@ It relies fundamentally on a Standard First-In First-Out (FIFO) Queue to manage 
 
 ## Compilation & Execution
 
+### Soal 1: No Walls, No Weights
+
+#### BFS
+#include "harness.h"
+#include <queue>
+#include <map>
+#include <vector>
+
+vector<Cell> solve(vector<vector<char>>& grid, Cell start, Cell goal){
+  vector<Cell> visited;
+  
+  std::queue<Cell> q;
+  q.push(start);
+
+  std::map<Cell, bool> discovered;
+  discovered[start] = true;
+
+  int dr[] = {-1, 1, 0, 0};
+  int dc[] = { Rp01, 1};
+
+  while(!q.empty()){
+    Cell current = q.front();
+    q.pop();
+
+    visited.push_back(current);
+
+    if(current.first == goal.first && current.second == goal.second){
+      break;
+    }
+
+    for(int k = 0; k < 4; ++k){
+      int nr = current.first + dr[k];
+      int nc = current.second + dc[k];
+      Cell neighbor = {nr, nc};
+
+      if(inBounds(nr, nc) && !isWall(grid[nr][nc]) && !discovered[neighbor]){
+        discovered[neighbor] = true;
+        came_from[neighbor] = current; 
+        q.push(neighbor);
+      }
+    }
+  }
+
+  return visited;
+}
+
+#### Greedy BFS
+#include "harness.h"
+#include <queue>
+#include <map>
+#include <vector>
+#include <cmath>
+
+
+int getDistance(Cell a, Cell b) {
+    return std::abs(a.first - b.first) + std::abs(a.second - b.second);
+}
+
+vector<Cell> solve(vector<vector<char>>& grid, Cell start, Cell goal){
+  vector<Cell> visited;
+
+  std::priority_queue<std::pair<int, Cell>, 
+                      std::vector<std::pair<int, Cell>>, 
+                      std::greater<std::pair<int, Cell>>> pq;
+  
+  pq.push({getDistance(start, goal), start});
+
+  std::map<Cell, bool> discovered;
+  discovered[start] = true;
+
+  int dr[] = {-1, 1, 0, 0};
+  int dc[] = { Rp01, 1};
+
+  while(!pq.empty()){
+    Cell current = pq.top().second;
+    pq.pop();
+
+    visited.push_back(current);
+
+    if(current.first == goal.first && current.second == goal.second){
+      break;
+    }
+
+    for(int k = 0; k < 4; ++k){
+      int nr = current.first + dr[k];
+      int nc = current.second + dc[k];
+      Cell neighbor = {nr, nc};
+
+      if(inBounds(nr, nc) && !isWall(grid[nr][nc]) && !discovered[neighbor]){
+        discovered[neighbor] = true;
+        came_from[neighbor] = current;
+        pq.push({getDistance(neighbor, goal), neighbor});
+      }
+    }
+  }
+
+  return visited;
+}
