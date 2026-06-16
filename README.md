@@ -8,8 +8,8 @@
 | **Soal 1 (No Walls/Weights)** | Greedy Best-First Search | **11** | **10** | **10** |
 | **Soal 2 (Walls, No Weights)** | Breadth-First Search (BFS) | **35** | **14** | **14** |
 | **Soal 2 (Walls, No Weights)** | Depth-First Search (DFS)| **30** | **14** | **14** |
-| **Soal 3 (Walls & Weights)** | *[Friend's Task — Pending]* | *TBD* | *TBD* | *TBD* |
-
+| **Soal 3 (Walls & Weights)** | Dijkstra | **278** | **46** | **47** |
+| **Soal 3 (Walls & Weights)** | Breadth-First Search (BFS) | **278** | **57** | **47** |
 ---
 
 ## Analysis Per Problem
@@ -33,10 +33,10 @@ It employs a Standard LIFO Stack for maintaining frontier nodes and Hash Map or 
 
 
 ### Soal 3: With Walls & Weights
+For Soal3, Dijkstra's Algorithm was chosen because the map contains both walls and weighted cells with traversal costs ranging from 1 to 9. In this situation, finding the shortest path in terms of steps is not enough, since a shorter route may have a higher total cost than a longer route with cheaper cells.
+Dijkstra's algorithm evaluates the cumulative cost of each path and always expands the node with the lowest known cost using a priority queue. This allows the algorithm to efficiently avoid expensive cells and identify the minimum-cost route to the goal.
+Compared to BFS, Dijkstra requires additional processing and memory because it must maintain distance values and manage a priority queue. However, this trade-off is worthwhile because it guarantees the optimal solution for weighted maps, making it the most suitable algorithm for Soal3.
 
-
-
----
 
 ## Compilation & Execution
 
@@ -252,4 +252,132 @@ vector<Cell> solve(vector<vector<char>>& grid, Cell start, Cell goal){
 
     return visited;
 }
+
 ```
+
+### Soal 3: With Walls and Weights
+
+#### Dijkstra
+```
+#include "harness.h"
+#include <queue>
+#include <vector>
+
+using namespace std;
+
+vector<Cell> solve(vector<vector<char>>& grid, Cell start, Cell goal){
+    vector<Cell> visited;
+    const int INF = 1e9;
+
+    vector<vector<int>> dist(rows_g, vector<int>(cols_g, INF));
+
+    priority_queue<
+        pair<int, Cell>,
+        vector<pair<int, Cell>>,
+        greater<pair<int, Cell>>
+    > pq;
+
+    dist[start.first][start.second] = 0;
+    pq.push({0, start});
+
+    int dr[4] = {-1, 1, 0, 0};
+    int dc[4] = {0, 0, -1, 1};
+
+    while(!pq.empty()){
+        auto [cost, current] = pq.top();
+        pq.pop();
+
+        int r = current.first;
+        int c = current.second;
+
+        if(cost > dist[r][c])
+            continue;
+
+        visited.push_back(current);
+
+        if(current == goal)
+            break;
+
+        for(int k = 0; k < 4; k++){
+            int nr = r + dr[k];
+            int nc = c + dc[k];
+
+            if(nr < 0 || nr >= rows_g || nc < 0 || nc >= cols_g)
+                continue;
+
+            if(grid[nr][nc] == '#')
+                continue;
+
+            int weight = 1;
+
+            if(grid[nr][nc] >= '1' && grid[nr][nc] <= '9')
+                weight = grid[nr][nc] - '0';
+
+            int newCost = cost + weight;
+
+            if(newCost < dist[nr][nc]){
+                dist[nr][nc] = newCost;
+
+                came_from[{nr, nc}] = current;
+
+                pq.push({newCost, {nr, nc}});
+            }
+        }
+    }
+
+    return visited;
+}
+
+```
+
+#### BFS
+```
+#include "harness.h"
+#include <queue>
+#include <vector>
+
+using namespace std;
+
+vector<Cell> solve(vector<vector<char>>& grid, Cell start, Cell goal){
+    vector<Cell> visited;
+
+    queue<Cell> q;
+    map<Cell,bool> seen;
+
+    q.push(start);
+    seen[start] = true;
+
+    int dr[4] = {-1,1,0,0};
+    int dc[4] = {0,0,-1,1};
+
+    while(!q.empty()){
+        Cell cur = q.front();
+        q.pop();
+
+        visited.push_back(cur);
+
+        if(cur == goal)
+            break;
+
+        for(int k=0;k<4;k++){
+            int nr = cur.first + dr[k];
+            int nc = cur.second + dc[k];
+
+            if(nr < 0 || nr >= rows_g || nc < 0 || nc >= cols_g)
+                continue;
+
+            if(grid[nr][nc] == '#')
+                continue;
+
+            Cell nxt = {nr,nc};
+
+            if(!seen[nxt]){
+                seen[nxt] = true;
+                came_from[nxt] = cur;
+                q.push(nxt);
+            }
+        }
+    }
+
+    return visited;
+}
