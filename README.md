@@ -20,6 +20,13 @@ BFS is an unweighted graph traversal algorithm that explores nodes layer by laye
 It relies fundamentally on a Standard First-In First-Out (FIFO) Queue to manage the collection of frontier nodes to explore next, alongside a Hash Map or Balanced BST to keep track of discovered cells and prevent cycle evaluation.
 
 ### Soal 2: With Walls, No Weights
+Breadth First Search / BFS
+BFS is an unweighted graph traversal algorithm that explores nodes in layers, evenly outwards from the start point, like an expanding ripple. It guarantees shortest path, since it visits every node at depth $d$ before it visits nodes at depth $d+1$.
+It is based on a standard FIFO Queue for the management of the frontier nodes and on a Hash Map or a Balanced BST to store the cells already discovered and to avoid cycles.
+
+Depth First Search / DFS
+DFS is a graph traversal algorithm . It starts in the initial node , and goes branch by branch , deep inwards . Like a root growing into the soil . It does not guarantee the shortest path, because it does not evaluate level by level, but jumps to maximum depth before backtracking.
+It employs a Standard LIFO Stack for maintaining frontier nodes and Hash Map or Balanced BST to record discovered cells and avoid loops.
 
 
 
