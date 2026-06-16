@@ -142,3 +142,114 @@ vector<Cell> solve(vector<vector<char>>& grid, Cell start, Cell goal){
   return visited;
 }
 ```
+
+### Soal 2: With Walls, No Weights
+
+#### BFS
+```
+#include "harness.h"
+#include <queue>
+#include <set>
+
+using namespace std;
+
+vector<Cell> solve(vector<vector<char>>& grid, Cell start, Cell goal){
+    vector<Cell> visited;
+
+    queue<Cell> q;
+    set<Cell> seen;
+
+    q.push(start);
+    seen.insert(start);
+
+    int dr[] = {-1, 1, 0, 0};
+    int dc[] = {0, 0, -1, 1};
+
+    while(!q.empty()){
+        Cell cur = q.front();
+        q.pop();
+
+        visited.push_back(cur);
+
+        if(cur == goal) break;
+
+        for(int k = 0; k < 4; k++){
+            int nr = cur.first + dr[k];
+            int nc = cur.second + dc[k];
+
+            if(!inBounds(nr, nc)) continue;
+            if(isWall(grid[nr][nc])) continue;
+
+            Cell nxt = {nr, nc};
+
+            if(seen.count(nxt)) continue;
+
+            seen.insert(nxt);
+
+            came_from[nxt] = cur;
+
+            q.push(nxt);
+        }
+    }
+
+    return visited;
+}
+```
+
+#### DFS
+```
+#include "harness.h"
+#include <stack>
+#include <set>
+
+vector<Cell> solve(vector<vector<char>>& grid, Cell start, Cell goal){
+
+    vector<Cell> visited;
+
+    stack<Cell> st;
+    set<Cell> seen;
+
+    st.push(start);
+    seen.insert(start);
+
+    int dr[] = {-1, 1, 0, 0};
+    int dc[] = {0, 0, -1, 1};
+
+    while(!st.empty()){
+
+        Cell current = st.top();
+        st.pop();
+
+        visited.push_back(current);
+
+        if(current == goal)
+            break;
+
+        int r = current.first;
+        int c = current.second;
+
+        for(int k = 0; k < 4; k++){
+
+            int nr = r + dr[k];
+            int nc = c + dc[k];
+
+            if(!inBounds(nr, nc))
+                continue;
+
+            if(isWall(grid[nr][nc]))
+                continue;
+
+            Cell neighbor = {nr, nc};
+
+            if(seen.count(neighbor))
+                continue;
+
+            seen.insert(neighbor);
+            came_from[neighbor] = current;
+            st.push(neighbor);
+        }
+    }
+
+    return visited;
+}
+```
