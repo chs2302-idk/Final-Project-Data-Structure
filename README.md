@@ -19,6 +19,7 @@
 
 ### Soal 1: Open Grid Layout (No Walls, No Weights)
 BFS is an unweighted graph traversal algorithm that explores nodes layer by layer uniformly outwards from the starting position, similar to a ripple expanding in water. It guarantees finding the shortest path on unweighted graphs because it evaluates all nodes at depth d before moving to depth 
+
 It relies fundamentally on a Standard First-In First-Out (FIFO) Queue to manage the collection of frontier nodes to explore next, alongside a Hash Map or Balanced BST to keep track of discovered cells and prevent cycle evaluation.
 
 ### Soal 2: Maze Layout (With Walls, No Weights)
