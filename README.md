@@ -1,9 +1,5 @@
 # Final-Project-Data-Structure
 
-[cite_start]Final project repository for the Data Structures course (IUP)[cite: 1]. [cite_start]This repository contains a C++ implementation of multiple pathfinding algorithms evaluated across three distinct map environments[cite: 2, 7]. [cite_start]Performance metrics are simulated and measured using a local web visualizer engine[cite: 2, 6].
-
----
-
 ## Final Comparison Metrics
 
 | Problem Map | Algorithm Used | Cells Explored (Visited) | Path Length (Moves) | Total Path Cost |
@@ -25,7 +21,9 @@ It relies fundamentally on a Standard First-In First-Out (FIFO) Queue to manage 
 ### Soal 2: With Walls, No Weights
 
 
+
 ### Soal 3: With Walls & Weights
+
 
 
 ---
